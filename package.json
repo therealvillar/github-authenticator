@@ -1,0 +1,30 @@
+{
+  "name": "github-authenticator",
+  "version": "0.1.0",
+  "description": "Reusable, config-driven GitHub OAuth authentication flow with domain restrictions, feature toggles, page permissions and password reset.",
+  "type": "module",
+  "main": "./src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "src",
+    "authenticator.config.example.js",
+    "README.md"
+  ],
+  "scripts": {
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "github",
+    "oauth",
+    "authentication",
+    "permissions",
+    "feature-flags"
+  ],
+  "license": "MIT"
+}
