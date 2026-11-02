@@ -25,7 +25,15 @@ export class MemoryStore {
 }
 
 const hashToken = (token) => createHash('sha256').update(String(token)).digest('hex');
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+function isValidEmail(email) {
+  if (email.length > 254 || /\s/.test(email)) return false;
+  const at = email.indexOf('@');
+  if (at < 1 || at !== email.lastIndexOf('@')) return false;
+  const domain = email.slice(at + 1);
+  const dot = domain.lastIndexOf('.');
+  return dot > 0 && dot < domain.length - 1;
+}
 
 /**
  * User-requested password reset.
@@ -50,7 +58,7 @@ export function createPasswordReset(config) {
   async function requestReset(email) {
     if (!opts.enabled || opts.mode !== 'custom') return { sent: false };
     const normalized = String(email || '').trim().toLowerCase();
-    if (!EMAIL_RE.test(normalized)) return { sent: false };
+    if (!isValidEmail(normalized)) return { sent: false };
     if (config.domain.allowed.length && !isEmailInDomains(normalized, config.domain.allowed)) {
       return { sent: false };
     }

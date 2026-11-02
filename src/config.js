@@ -159,7 +159,7 @@ export function normalizeConfig(input = {}) {
   }
 
   config.users = lowerKeys(config.users);
-  config.routes.basePath = '/' + config.routes.basePath.replace(/^\/+|\/+$/g, '');
+  config.routes.basePath = '/' + String(config.routes.basePath).split('/').filter(Boolean).join('/');
   if (!pr.resetUrl) pr.resetUrl = `${config.github.baseUrl.replace(/\/$/, '')}/password_reset`;
   return config;
 }

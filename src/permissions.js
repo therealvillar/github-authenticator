@@ -40,8 +40,8 @@ export function matchPath(pattern, pathname) {
  */
 export function pathVariants(pathname) {
   const clean = (p) => {
-    const collapsed = String(p || '/').split('?')[0].replace(/\/{2,}/g, '/');
-    return collapsed.length > 1 ? collapsed.replace(/\/+$/, '') || '/' : '/';
+    const segments = String(p || '/').split('?')[0].split('/').filter(Boolean);
+    return `/${segments.join('/')}`;
   };
   const variants = new Set([clean(pathname)]);
   try {
