@@ -1,0 +1,5 @@
+node_modules/
+coverage/
+.env
+authenticator.config.js
+authenticator.config.json
